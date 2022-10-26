@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 
 const Register = () => {
@@ -83,10 +84,15 @@ const Register = () => {
             required
           />
         </Form.Group>
+        <Form.Text className="text-danger">{error}</Form.Text>
         <Button variant="primary" type="submit">
           Register
         </Button>
-        <Form.Text className="text-danger">{error}</Form.Text>
+        <p>
+          <small>
+            Already have an account? Please <Link to="/login">Log in</Link>
+          </small>
+        </p>
       </Form>
     </div>
   );

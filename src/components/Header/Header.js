@@ -5,6 +5,8 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import { FaUser } from "react-icons/fa";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 import Button from "react-bootstrap/Button";
 import { AuthContext } from "../../contexts/AuthContext";
 
@@ -25,10 +27,12 @@ const Header = () => {
               alt=""
               src="https://cdn.iconscout.com/icon/free/png-256/code-forces-3628695-3029920.png"
               width="30"
-              height="30"
+              height="40"
               className="d-inline-block align-top"
             />
-            Code Force
+            <Link className="btn fs-5 fw-bold btn-dark" to="/">
+              Code Force
+            </Link>
           </Navbar.Brand>
           <Nav className="me-auto">
             <Nav>
@@ -51,7 +55,13 @@ const Header = () => {
             <>
               {user?.uid ? (
                 <>
-                  <span className="mt-2 fw-bold fs-5">{user?.displayName}</span>
+                  <Button
+                    className="me-4"
+                    variant="light"
+                    onClick={handleLogOut}
+                  >
+                    Log out
+                  </Button>
                 </>
               ) : (
                 <>
@@ -67,20 +77,20 @@ const Header = () => {
             <>
               {user?.photoURL ? (
                 <>
-                  <Link to="/profile">
+                  <OverlayTrigger
+                    placement="bottom"
+                    overlay={
+                      <Tooltip>
+                        <strong>{user?.displayName}</strong>.
+                      </Tooltip>
+                    }
+                  >
                     <Image
-                      style={{ height: "30px" }}
+                      style={{ height: "40px" }}
                       roundedCircle
                       src={user?.photoURL}
                     ></Image>
-                  </Link>
-                  <Button
-                    className="ms-1"
-                    variant="light"
-                    onClick={handleLogOut}
-                  >
-                    Log out
-                  </Button>
+                  </OverlayTrigger>
                 </>
               ) : (
                 <FaUser className="mt-2 text-white"></FaUser>

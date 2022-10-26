@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Form from "react-bootstrap/Form";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { FaGoogle, FaGithub } from "react-icons/fa";
@@ -10,7 +11,7 @@ import { FaGoogle, FaGithub } from "react-icons/fa";
 import { GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
-  const { signIn, setLoading } = useContext(AuthContext);
+  const { signIn, setLoading, providerLogin } = useContext(AuthContext);
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
@@ -46,8 +47,6 @@ const Login = () => {
       });
   };
 
-  const { providerLogin } = useContext(AuthContext);
-
   const googleProvider = new GoogleAuthProvider();
 
   const handleGoogleSignIn = () => {
@@ -55,6 +54,13 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        if (user.emailVerified) {
+          navigate(from, { replace: true });
+        } else {
+          toast.error(
+            "Your email address is not verified.Please verify your email address."
+          );
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -87,6 +93,11 @@ const Login = () => {
         <Button variant="primary" type="submit">
           Login
         </Button>
+        <p>
+          <small>
+            New to this website? Please <Link to="/register">Register</Link>
+          </small>
+        </p>
         <p className="mt-3">OR</p>
         <ButtonGroup vertical>
           <Button

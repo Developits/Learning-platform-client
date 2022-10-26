@@ -1,9 +1,14 @@
 import React from "react";
+import { useLoaderData } from "react-router-dom";
+import CourseCard from "../CourseCard/CourseCard";
 
 const Courses = () => {
+  const courseData = useLoaderData();
   return (
     <div>
-      <h1>This is Courses.</h1>
+      {courseData.map((course) => (
+        <CourseCard key={course.id} course={course}></CourseCard>
+      ))}
     </div>
   );
 };
