@@ -17,7 +17,7 @@ const CourseCard = ({ course }) => {
         <div>
           <Button onClick={handleCourse}>{name}</Button>
         </div>
-        <div>
+        <div className="card-container">
           <Card onClick={handleCourse} style={{ width: "18rem" }}>
             <Card.Img variant="top" src={logo} />
             <Card.Body>

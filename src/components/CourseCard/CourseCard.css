@@ -1,8 +1,16 @@
-.course-container{
+.course-container {
   display: grid;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 1fr 4fr;
 }
-.card-details{
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 45px;
+  margin: 100px 50px;
+}
+
+.card-details {
   display: flex;
   justify-content: space-between;
   align-items: center;
