@@ -1,5 +1,5 @@
 import React from "react";
-import { useLoaderData, Link } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Pdf from "react-to-pdf";
 import { useNavigate } from "react-router-dom";
@@ -13,13 +13,9 @@ const CourseDetails = () => {
   const { id, name, logo, duration, prize, rating, description } = details[0];
   const navigate = useNavigate();
 
-  const handlePremium = () => {
-    navigate(`/courses/${id}/premium`);
-  };
-
   return (
     <div>
-      <Card ref={ref} className="text-center w-50 mx-auto mt-5">
+      <Card ref={ref} className="text-center w-50 mx-auto mt-3">
         <Card.Header as="h5">
           <>{name}</>
           <Pdf targetRef={ref} filename="Course Details.pdf">
@@ -32,15 +28,18 @@ const CourseDetails = () => {
           <Card.Img className="h-25 w-25 mb-3" variant="top" src={logo} />
           <Card.Text>{description}</Card.Text>
           <div className="card-details">
-            <p>Duration: {duration}</p>
-            <p>Prize: {prize}</p>
+            <p>Duration: {duration} hr</p>
+            <p>Prize: {prize} Tk</p>
             <p>Ratings: {rating}</p>
           </div>
-          <Link to="/premium">
-            <Button onClick={handlePremium} variant="primary">
-              Get premium access
-            </Button>
-          </Link>
+          <Button
+            onClick={() => {
+              navigate(`/premium/${id}`);
+            }}
+            variant="primary"
+          >
+            Get premium access
+          </Button>
         </Card.Body>
       </Card>
     </div>

@@ -1,13 +1,18 @@
 .course-container {
   display: grid;
   grid-template-columns: 1fr 4fr;
+  gap: 20px;
 }
 
 .card-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 45px;
-  margin: 100px 50px;
+  gap: 10px;
+}
+
+.img-size {
+  height: 300px;
+  width: 300px;
 }
 
 .card-details {

@@ -9,6 +9,7 @@ import Register from "../../components/Register/Register";
 import CourseDetails from "../../components/CourseDetails/CourseDetails";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import Premium from "../../components/Premium/Premium";
+import Error from "../../components/Error/Error";
 
 export const routes = createBrowserRouter([
   {
@@ -18,18 +19,23 @@ export const routes = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+        errorElement: <Error></Error>,
       },
       {
         path: "/courses",
-        loader: () => fetch("http://localhost:5000/coursesInfo"),
+        loader: () => fetch("https://code-force-server.vercel.app/coursesInfo"),
         element: <Courses></Courses>,
+        errorElement: <Error></Error>,
       },
       {
         path: "/courses/:courseId",
         loader: ({ params }) => {
-          return fetch(`http://localhost:5000/coursesInfo/${params.courseId}`);
+          return fetch(
+            `https://code-force-server.vercel.app/coursesInfo/${params.courseId}`
+          );
         },
         element: <CourseDetails></CourseDetails>,
+        errorElement: <Error></Error>,
       },
       {
         path: "/blogs",
@@ -48,15 +54,22 @@ export const routes = createBrowserRouter([
         element: <Register></Register>,
       },
       {
-        path: "/courses/:courseId/premium",
+        path: "/premium/:id",
         loader: ({ params }) => {
-          return fetch(`http://localhost:5000/coursesInfo/${params.courseId}`);
+          return fetch(
+            `https://code-force-server.vercel.app/coursesInfo/${params.id}`
+          );
         },
+
         element: (
           <PrivateRoute>
             <Premium></Premium>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "*",
+        element: <Error></Error>,
       },
     ],
   },

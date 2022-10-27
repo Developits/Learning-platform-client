@@ -1,26 +1,37 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 import { useLoaderData } from "react-router-dom";
 
 const Premium = () => {
   const details = useLoaderData();
-  console.log(details);
+  const { name, logo, prize, description } = details[0];
+
+  const navigate = useNavigate();
+
+  const handleCourse = () => {
+    navigate(`/courses`);
+  };
   return (
-    <div className="w-50 mx-auto mt-5">
-      <Form>
-        <Form.Group className="mb-3">
-          <Form.Label>Course Name</Form.Label>
-          <Form.Control name="courseName" type="text" readOnly="sfx" />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Course prize</Form.Label>
-          <Form.Control name="CoursePrize" type="text" readOnly="sdf" />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
+    <div className="card mt-5 w-50 mx-auto mb-3">
+      <div className="row p-2 g-0">
+        <div className="col-md-4">
+          <img className="img-fluid rounded-start" src={logo} alt="" />
+        </div>
+        <div className="col-md-8">
+          <div className="card-body">
+            <h5 className="card-title">{name}</h5>
+            <p className="card-text">{description}</p>
+            <p className="card-text">
+              <small className="text-muted">Prize: {prize} Taka</small>
+            </p>
+            <Button onClick={handleCourse} className="me-3">
+              Purchase
+            </Button>
+            <Button onClick={handleCourse}>Cancel</Button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

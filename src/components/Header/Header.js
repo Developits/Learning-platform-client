@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -12,11 +12,20 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [mode, setMode] = useState("Dark");
 
   const handleLogOut = () => {
     logOut()
       .then(() => {})
       .catch((error) => console.error(error));
+  };
+
+  const handleMode = () => {
+    if (mode === "Dark") {
+      setMode("Light");
+    } else {
+      setMode("Dark");
+    }
   };
   return (
     <div>
@@ -52,6 +61,9 @@ const Header = () => {
             </Nav>
           </Nav>
           <Nav>
+            <Button className="me-4" variant="light" onClick={handleMode}>
+              {mode}
+            </Button>
             <>
               {user?.uid ? (
                 <>
