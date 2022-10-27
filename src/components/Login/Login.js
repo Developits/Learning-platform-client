@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 
-import { GoogleAuthProvider } from "firebase/auth";
+import { GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 
 const Login = () => {
   const { signIn, setLoading, providerLogin } = useContext(AuthContext);
@@ -67,6 +67,26 @@ const Login = () => {
       });
   };
 
+  const githubProvider = new GithubAuthProvider();
+
+  const handleGithubSignIn = () => {
+    providerLogin(githubProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        if (user.emailVerified) {
+          navigate(from, { replace: true });
+        } else {
+          toast.error(
+            "Your email address is not verified.Please verify your email address."
+          );
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div className="w-50 mx-auto mt-5">
       <h1>Please log in !</h1>
@@ -107,7 +127,7 @@ const Login = () => {
           >
             <FaGoogle></FaGoogle> Log in with Google
           </Button>
-          <Button variant="outline-dark">
+          <Button onClick={handleGithubSignIn} variant="outline-dark">
             <FaGithub></FaGithub> Log in with Github
           </Button>
         </ButtonGroup>

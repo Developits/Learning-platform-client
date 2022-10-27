@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <div className="text-center ">
       <div className="pt-5 align-center">
-        <p class="fs-1 fw-bolder">Hello There</p>
+        <p className="fs-1 fw-bolder">Hello There</p>
         <p className="mt-5">
           Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
           excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a

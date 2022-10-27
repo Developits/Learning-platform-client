@@ -57,12 +57,12 @@ const Register = () => {
       <h1>Please Register first !</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Your Name</Form.Label>
-          <Form.Control name="name" type="text" placeholder="Your Name" />
+          <Form.Label>Your Full Name</Form.Label>
+          <Form.Control name="name" type="text" placeholder="Your Full Name" />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Photo URL</Form.Label>
-          <Form.Control name="photoURL" type="text" placeholder="Phot URL" />
+          <Form.Control name="photoURL" type="text" placeholder="Photo URL" />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
